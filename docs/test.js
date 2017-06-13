@@ -158,7 +158,7 @@ function pcSetup(remoteId) {
 function getStats(side) {
   var view = window[side + 'View'];
   var track = view ? view.srcObject.getVideoTracks()[0] : null;
-  var container = window[side + 'StreamStatsContainer'];
+  var container = window[side + 'StatsContainer'];
   pc.getStats(track).then(report => {
     report.forEach(now => {
       var reportMemberDiv = window['rpt' + side + now.id];
