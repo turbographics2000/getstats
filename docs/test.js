@@ -16,7 +16,7 @@ fetch(`https://skyway.io/${apiKey}/id?ts=${Date.now()}${Math.random()}`).then(re
 });
 
 btnStart.onclick = evt => {
-  pcSetup();
+  pcSetup(callTo.value);
 }
 
 function socketSetup() {
