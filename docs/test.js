@@ -161,7 +161,7 @@ function getStats(track, container) {
       Object.keys(reportObj).forEach(key => {
         var reportObjKeyDiv = window['rpt' + now.id + key];
         if (!reportObjKeyDiv) {
-          var reportObjKeyDiv = document.createElement();
+          var reportObjKeyDiv = document.createElement('div');
           reportObjKeyDiv.id = 'rpt' + now.id + key;
           reportObjKeyDiv.classList.add('rpt-obj-member');
           container.appendChild(reportObjKeyDiv);
