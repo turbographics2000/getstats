@@ -15,6 +15,11 @@ fetch(`https://skyway.io/${apiKey}/id?ts=${Date.now()}${Math.random()}`).then(re
   });
 });
 
+var getRemoteIdSIId = null;
+getRemoteIdSIId = setInterval(_ => {
+  fetch(`https://skyway.io/active/list/${apiKey}`).then(res => res.text()).then(txt => console.log(txt));
+}, 1000)
+
 btnStart.onclick = evt => {
   pcSetup(callTo.value);
 }
