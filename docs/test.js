@@ -35,7 +35,9 @@ btnStart.onclick = evt => {
 var getStatsSIId = null;
 btnGetStats.onclick = evt => {
   getStatsSIId = setInterval(_ => {
-    getStats();
+    ['local', 'remote'].forEach(side => {
+      getStats(side);
+    });
   }, 1000);
 }
 
@@ -153,38 +155,31 @@ function pcSetup(remoteId) {
   });
 }
 
-function getStats() {
-  var p = null;
-  ['local', 'remote'].forEach(side => {
-    p = p || Promise.resolve(side);
-    p.then(side => {
-      var view = window[side + 'View'];
-      var track = view.srcObject.getVideoTracks()[0];
-      var container = window[side + 'StreamStatsContainer'];
-      if(side === 'remote') debugger;
-      pc.getStats(track).then(report => {
-        report.forEach(now => {
-          var reportMemberDiv = window['rpt' + side + now.id];
-          if (!reportMemberDiv) {
-            reportMemberDiv = document.createElement('div');
-            reportMemberDiv.id = 'rpt' + side + now.id;
-            reportMemberDiv.classList.add('rpt-member');
-            container.appendChild(reportMemberDiv);
-          }
-          reportMemberDiv.textContent = now.id;
-          var reportObj = report.get(now.id);
-          Object.keys(reportObj).forEach(key => {
-            var reportObjKeyDiv = window['rpt' + side + now.id + key];
-            if (!reportObjKeyDiv) {
-              var reportObjKeyDiv = document.createElement('div');
-              reportObjKeyDiv.id = 'rpt' + side + now.id + key;
-              reportObjKeyDiv.classList.add('rpt-obj-member');
-              container.appendChild(reportObjKeyDiv);
-            }
-            reportObjKeyDiv.textContent = key + ": " + reportObj[key];
-          });
-        })
+function getStats(side) {
+  var view = window[side + 'View'];
+  var track = view.srcObject.getVideoTracks()[0];
+  var container = window[side + 'StreamStatsContainer'];
+  pc.getStats(track).then(report => {
+    report.forEach(now => {
+      var reportMemberDiv = window['rpt' + side + now.id];
+      if (!reportMemberDiv) {
+        reportMemberDiv = document.createElement('div');
+        reportMemberDiv.id = 'rpt' + side + now.id;
+        reportMemberDiv.classList.add('rpt-member');
+        container.appendChild(reportMemberDiv);
+      }
+      reportMemberDiv.textContent = now.id;
+      var reportObj = report.get(now.id);
+      Object.keys(reportObj).forEach(key => {
+        var reportObjKeyDiv = window['rpt' + side + now.id + key];
+        if (!reportObjKeyDiv) {
+          var reportObjKeyDiv = document.createElement('div');
+          reportObjKeyDiv.id = 'rpt' + now.id + key;
+          reportObjKeyDiv.classList.add('rpt-obj-member');
+          container.appendChild(reportObjKeyDiv);
+        }
+        reportObjKeyDiv.textContent = key + ": " + reportObj[key];
       });
-    });
+    })
   });
 }
