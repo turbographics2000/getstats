@@ -159,12 +159,12 @@ function getStats(track, container) {
       reportMemberDiv.textContent = now.id;
       var reportObj = report.get(now.id);
       Object.keys(reportObj).forEach(key => {
-        var reportObjMemberDiv = window['rpt' + now.id + key];
-        if (!reportObjMemberDiv) {
+        var reportObjKeyDiv = window['rpt' + now.id + key];
+        if (!reportObjKeyDiv) {
           var reportObjKeyDiv = document.createElement();
           reportObjKeyDiv.id = 'rpt' + now.id + key;
-          reportMemberDiv.classList.add('rpt-obj-member');
-          container.appendChild(reportObjMemberDiv);
+          reportObjKeyDiv.classList.add('rpt-obj-member');
+          container.appendChild(reportObjKeyDiv);
         }
         reportObjKeyDiv.textContent = key + ": " + reportObj[key];
       });
