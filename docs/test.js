@@ -159,7 +159,7 @@ function getStats() {
     var view = window[side + 'View'];
     var track = view.srcObject.getVideoTracks()[0];
     var container = window[side + 'StreamStatsContainer'];
-    p = p.pc.getStats(track).then(report => {
+    p = p.then(_ => pc.getStats(track)).then(report => {
       report.forEach(now => {
         var reportMemberDiv = window['rpt' + side + now.id];
         if (!reportMemberDiv) {
