@@ -160,20 +160,20 @@ function getStats() {
     var container = window[side + 'StreamStatsContainer'];
     pc.getStats(track).then(report => {
       report.forEach(now => {
-        var reportMemberDiv = window['rpt' + now.id];
+        var reportMemberDiv = window['rpt' + side + now.id];
         if (!reportMemberDiv) {
           reportMemberDiv = document.createElement('div');
-          reportMemberDiv.id = 'rpt' + now.id;
+          reportMemberDiv.id = 'rpt' + side + now.id;
           reportMemberDiv.classList.add('rpt-member');
           container.appendChild(reportMemberDiv);
         }
         reportMemberDiv.textContent = now.id;
         var reportObj = report.get(now.id);
         Object.keys(reportObj).forEach(key => {
-          var reportObjKeyDiv = window['rpt' + now.id + key];
+          var reportObjKeyDiv = window['rpt' + side + now.id + key];
           if (!reportObjKeyDiv) {
             var reportObjKeyDiv = document.createElement('div');
-            reportObjKeyDiv.id = 'rpt' + now.id + key;
+            reportObjKeyDiv.id = 'rpt' + side + now.id + key;
             reportObjKeyDiv.classList.add('rpt-obj-member');
             container.appendChild(reportObjKeyDiv);
           }
