@@ -35,7 +35,7 @@ btnStart.onclick = evt => {
 var getStatsSIId = null;
 btnGetStats.onclick = evt => {
   getStatsSIId = setInterval(_ => {
-    ['local', 'remote'].forEach(side => {
+    ['', 'local', 'remote'].forEach(side => {
       getStats(side);
     });
   }, 1000);
@@ -157,7 +157,7 @@ function pcSetup(remoteId) {
 
 function getStats(side) {
   var view = window[side + 'View'];
-  var track = view.srcObject.getVideoTracks()[0];
+  var track = view ? view.srcObject.getVideoTracks()[0] : null;
   var container = window[side + 'StreamStatsContainer'];
   console.log(side, track.id);
   pc.getStats(track).then(report => {
