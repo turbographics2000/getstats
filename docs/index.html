@@ -9,6 +9,10 @@
             width: 120px;
             height: 90px;
         }
+        .stats-contaienr{
+            display: inline-block;
+            width: 500px;
+        }
     </style>
 </head>
 
@@ -24,6 +28,13 @@
     <video id="remoteView" autoplay></video>
     <script src="peer.js"></script>
     <script src="test.js"></script>
+
+    <button id="btnGetStatsTargetLocalStream">getStats() (localStream)</button>
+    <button id="btnGetStatsTargetRemteStream">getStats() (remoteStream)</button>
+    <div>
+    <div id="localStreamStatsContainer" class="stats-container"></div>
+    <div id="remoteStreamStatsContainer" class="starts-container"></div>
+    </div>
 </body>
 
 </html>

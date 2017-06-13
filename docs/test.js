@@ -19,6 +19,15 @@ btnStart.onclick = evt => {
   pcSetup(callTo.value);
 }
 
+btnGetStatsTargetLocalStream.onclick = evt => {
+  getStats(selfView.srcObject.getVideoTracks()[0], localStreamStatsContainer);
+}
+
+btnGetStatsTargetRemoteStream.onclick = evt => {
+  getStats(remoteView.srcObject.getVideoTracks()[0], remoteStreamStatsContainer);
+}
+
+
 function socketSetup() {
   socket.onopen = function () {
     console.log('socket on open');
@@ -129,4 +138,20 @@ function pcSetup(remoteId) {
       pc.addStream(stream);
     }
   });
+}
+
+function getStats(track, container) {
+  pc.getStats(track).then(reports => {
+    reports.forEach(report => {
+      Object.keys(report).forEach(key => {
+        var reportMemberDiv = window['rpt' + key];
+        if (!reportMemberDiv) {
+          reportMemberDiv = document.createElement('div');
+          div.id = 'rpt' + key;
+          container.appenndChild(div);
+        }
+        reportMemberDiv.textContent = report[key];
+      })
+    })
+  })
 }
