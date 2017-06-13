@@ -174,7 +174,7 @@ function getStats(side) {
         var reportObjKeyDiv = window['rpt' + side + now.id + key];
         if (!reportObjKeyDiv) {
           var reportObjKeyDiv = document.createElement('div');
-          reportObjKeyDiv.id = 'rpt' + now.id + key;
+          reportObjKeyDiv.id = 'rpt' + side + now.id + key;
           reportObjKeyDiv.classList.add('rpt-obj-member');
           container.appendChild(reportObjKeyDiv);
         }
