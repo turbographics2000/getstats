@@ -35,14 +35,14 @@ btnStart.onclick = evt => {
 var localSIId = null;
 btnGetStatsTargetLocalStream.onclick = evt => {
   localSIId = setInterval(_ => {
-    getStats(selfView.srcObject.getVideoTracks()[0], localStreamStatsContainer);
+    getStats('local');
   }, 1000);
 }
 
 var remoteSIId = null;
 btnGetStatsTargetRemteStream.onclick = evt => {
   remoteSIId = setInterval(_ => {
-    getStats(remoteView.srcObject.getVideoTracks()[0], remoteStreamStatsContainer);
+    getStats('remote');
   }, 1000);
 }
 
@@ -148,7 +148,7 @@ function pcSetup(remoteId) {
   }
 
   navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-    selfView.srcObject = stream;
+    localView.srcObject = stream;
     if ('addTrack' in pc) {
       stream.getTracks().forEach(track => {
         pc.addTrack(track, stream);
@@ -159,7 +159,10 @@ function pcSetup(remoteId) {
   });
 }
 
-function getStats(track, container) {
+function getStats(side) {
+  var view = window[side + 'View'].srcObject.getVideoTracks()[0];
+  var track = view.srcObject.getVideoTracks()[0];
+  var container = window[side + 'StreamStatsContainer'];
   pc.getStats(track).then(report => {
     report.forEach(now => {
       var reportMemberDiv = window['rpt' + now.id];
