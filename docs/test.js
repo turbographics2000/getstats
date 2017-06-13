@@ -148,7 +148,7 @@ function pcSetup(remoteId) {
 
 function getStats(track, container) {
   pc.getStats(track).then(report => {
-    Object.keys(report).forEach(now => {
+    report.forEach(now => {
       var reportMemberDiv = window['rpt' + now.id];
       if (!reportMemberDiv) {
         reportMemberDiv = document.createElement('div');
