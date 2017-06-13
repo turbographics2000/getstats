@@ -166,7 +166,7 @@ function getStats(track, container) {
           reportMemberDiv.classList.add('rpt-obj-member');
           container.appendChild(reportObjMemberDiv);
         }
-        reportMemberDiv.textContent = key + ": " + reportObj[key];
+        reportObjKeyDiv.textContent = key + ": " + reportObj[key];
       });
     })
   });
