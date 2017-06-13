@@ -13,7 +13,7 @@
         .stats-container {
             display: inline-block;
             width: 500px;
-            max-width: 300px;
+            max-width: 600px;
             text-overflow: ellipsis;
             border: 1px solid black;
             margin: 10px;
@@ -53,8 +53,12 @@
         <button id="btnGetStatsTargetRemteStream">getStats() (remoteStream)</button>
     </div>
     <div>
-        <div id="localStreamStatsContainer" class="stats-container"></div>
-        <div id="remoteStreamStatsContainer" class="starts-container"></div>
+        <div id="localStreamStatsContainer" class="stats-container">
+            <h2>Local Stream Stats</h2>
+        </div>
+        <div id="remoteStreamStatsContainer" class="starts-container">
+            <h2>Remote Stream Stats</h2>
+        </div>
     </div>
     <script src="peer.js"></script>
     <script src="test.js"></script>
