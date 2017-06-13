@@ -119,7 +119,14 @@ function pcSetup(remoteId) {
     }
   }
 
-  navigator.mediaDevices.getUserMedia({video: true}).then(stream => {
+  navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
     selfView.srcObject = stream;
+    if ('addTrack' in pc) {
+      stream.getTracks().forEach(track => {
+        pc.addTrack(track, stream);
+      });
+    } else {
+      pc.addStream(stream);
+    }
   });
 }
