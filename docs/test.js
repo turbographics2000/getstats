@@ -153,9 +153,20 @@ function getStats(track, container) {
       if (!reportMemberDiv) {
         reportMemberDiv = document.createElement('div');
         reportMemberDiv.id = 'rpt' + now.id;
+        reportMemberDiv.classList.add('rpt-member');
         container.appendChild(reportMemberDiv);
       }
-      reportMemberDiv.textContent = now.id + ": " + report.get(now.id);
+      reportMemberDiv.textContent = now.id;
+      var reportObj = report.get(now.id);
+      Object.keys(reportObj).forEach(key => {
+        var reportObjMemberDiv = window['rpt' + now.id + key];
+        if (!reportObjMemberDiv) {
+          var reportObjKeyDiv = document.createElement();
+          reportMemberDiv.classList.add('rpt-obj-member');
+          container.appendChild(reportObjMemberDiv);
+        }
+        reportMemberDiv.textContent = key + ": " + reportObj[key];
+      });
     })
   });
 }
