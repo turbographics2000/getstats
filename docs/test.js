@@ -152,7 +152,7 @@ function getStats(track, container) {
       var reportMemberDiv = window['rpt' + now.id];
       if (!reportMemberDiv) {
         reportMemberDiv = document.createElement('div');
-        div.id = 'rpt' + now.id;
+        reportMemberDiv.id = 'rpt' + now.id;
         container.appenndChild(div);
       }
       reportMemberDiv.textContent = now.id + ": " + report.get(now.id);
