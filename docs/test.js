@@ -19,16 +19,16 @@ btnStart.onclick = evt => {
   pcSetup(callTo.value);
 }
 
-var localSTOId = null;
+var localSIId = null;
 btnGetStatsTargetLocalStream.onclick = evt => {
-  localSTOId = setTimeout(_ => {
+  localSIId = setInterval(_ => {
     getStats(selfView.srcObject.getVideoTracks()[0], localStreamStatsContainer);
   }, 1000);
 }
 
-var remoteSTOId = null;
+var remoteSIId = null;
 btnGetStatsTargetRemteStream.onclick = evt => {
-  remoteSTOId = setTimeout(_ => {
+  remoteSIId = setInterval(_ => {
     getStats(remoteView.srcObject.getVideoTracks()[0], remoteStreamStatsContainer);
   }, 1000);
 }
