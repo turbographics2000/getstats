@@ -162,6 +162,7 @@ function getStats(track, container) {
         var reportObjMemberDiv = window['rpt' + now.id + key];
         if (!reportObjMemberDiv) {
           var reportObjKeyDiv = document.createElement();
+          reportObjKeyDiv.id = 'rpt' + now.id + key;
           reportMemberDiv.classList.add('rpt-obj-member');
           container.appendChild(reportObjMemberDiv);
         }
