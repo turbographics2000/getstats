@@ -6,6 +6,7 @@ fetch(`https://skyway.io/${apiKey}/id?ts=${Date.now()}${Math.random()}`).then(re
   socket = new WebSocket(`wss://skyway.io/peerjs?key=${apiKey}&id=${myId}&token=${token}`);
   socketSetup(socket);
 
+
   navigator.mediaDevices.enumerateDevices().then(devs => {
     var videoDevices = devs.filter(device => device.kind === 'videoinput');
     if (videoDevices.length > 0) {
@@ -15,10 +16,18 @@ fetch(`https://skyway.io/${apiKey}/id?ts=${Date.now()}${Math.random()}`).then(re
   });
 });
 
-var getRemoteIdSIId = null;
-getRemoteIdSIId = setInterval(_ => {
-  fetch(`https://skyway.io/active/list/${apiKey}`).then(res => res.text()).then(txt => console.log(txt));
-}, 1000)
+function getRmoteIds() {
+  var getRemoteIdSIId = null;
+  getRemoteIdSIId = setInterval(_ => {
+    fetch(`https://skyway.io/active/list/${apiKey}`).then(res => res.json()).then(list => {
+      var remotIds = list.filter(memberId => memberId !== id);
+      if(remotIds.length) {
+        callTo.value = remoteIds[0];
+        clearInterval(getRemoteIdSIId);
+      }
+    });
+  }, 1000);
+}
 
 btnStart.onclick = evt => {
   pcSetup(callTo.value);
