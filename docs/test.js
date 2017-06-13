@@ -5,8 +5,7 @@ fetch(`https://skyway.io/${apiKey}/id?ts=${Date.now()}${Math.random()}`).then(re
   myIdDisp.textContent = myId = id;
   socket = new WebSocket(`wss://skyway.io/peerjs?key=${apiKey}&id=${myId}&token=${token}`);
   socketSetup(socket);
-
-
+  getRmoteIds();
   navigator.mediaDevices.enumerateDevices().then(devs => {
     var videoDevices = devs.filter(device => device.kind === 'videoinput');
     if (videoDevices.length > 0) {
@@ -21,7 +20,7 @@ function getRmoteIds() {
   getRemoteIdSIId = setInterval(_ => {
     fetch(`https://skyway.io/active/list/${apiKey}`).then(res => res.json()).then(list => {
       var remotIds = list.filter(memberId => memberId !== id);
-      if(remotIds.length) {
+      if (remotIds.length) {
         callTo.value = remoteIds[0];
         clearInterval(getRemoteIdSIId);
       }
