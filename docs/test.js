@@ -158,6 +158,7 @@ function getStats() {
   ['local', 'remote'].forEach(side => {
     p = p || Promise.resolve(side);
     p = p.then(side => {
+      console.log(side);
       var view = window[side + 'View'];
       var track = view.srcObject.getVideoTracks()[0];
       var container = window[side + 'StreamStatsContainer'];
