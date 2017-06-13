@@ -160,7 +160,7 @@ function pcSetup(remoteId) {
 }
 
 function getStats(side) {
-  var view = window[side + 'View'].srcObject.getVideoTracks()[0];
+  var view = window[side + 'View'];
   var track = view.srcObject.getVideoTracks()[0];
   var container = window[side + 'StreamStatsContainer'];
   pc.getStats(track).then(report => {
