@@ -19,12 +19,18 @@ btnStart.onclick = evt => {
   pcSetup(callTo.value);
 }
 
+var localSTOId = null;
 btnGetStatsTargetLocalStream.onclick = evt => {
-  getStats(selfView.srcObject.getVideoTracks()[0], localStreamStatsContainer);
+  localSTOId = setTimeout(_ => {
+    getStats(selfView.srcObject.getVideoTracks()[0], localStreamStatsContainer);
+  }, 1000);
 }
 
+var remoteSTOId = null;
 btnGetStatsTargetRemteStream.onclick = evt => {
-  getStats(remoteView.srcObject.getVideoTracks()[0], remoteStreamStatsContainer);
+  remoteSTOId = setTimeout(_ => {
+    getStats(remoteView.srcObject.getVideoTracks()[0], remoteStreamStatsContainer);
+  }, 1000);
 }
 
 
@@ -141,18 +147,15 @@ function pcSetup(remoteId) {
 }
 
 function getStats(track, container) {
-  pc.getStats(track).then(reports => {
-    reports.forEach(report => {
-      Object.keys(report).forEach(key => {
-        var reportMemberDiv = window['rpt' + key];
-        if (!reportMemberDiv) {
-          reportMemberDiv = document.createElement('div');
-          div.id = 'rpt' + key;
-          container.appenndChild(div);
-        }
-        reportMemberDiv.textContent = key + ": " + report[key];
-      })
+  pc.getStats(track).then(report => {
+    Object.keys(report).forEach(now => {
+      var reportMemberDiv = window['rpt' + now.id];
+      if (!reportMemberDiv) {
+        reportMemberDiv = document.createElement('div');
+        div.id = 'rpt' + now.id;
+        container.appenndChild(div);
+      }
+      reportMemberDiv.textContent = now.id + ": " + report.get(now.id);
     })
   });
-  setTimeout(getStats.bind(track, container), 1000);
 }
