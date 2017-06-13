@@ -154,12 +154,13 @@ function pcSetup(remoteId) {
 }
 
 function getStats() {
-  var p = Promise.resolve();
+  var p = null;
   ['local', 'remote'].forEach(side => {
     var view = window[side + 'View'];
     var track = view.srcObject.getVideoTracks()[0];
     var container = window[side + 'StreamStatsContainer'];
-    p.then(_ => {
+    p = p || Promise.resolve(side);
+    p.then(side => {
       pc.getStats(track).then(report => {
         report.forEach(now => {
           var reportMemberDiv = window['rpt' + side + now.id];
