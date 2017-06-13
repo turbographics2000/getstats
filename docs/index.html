@@ -9,7 +9,8 @@
             width: 120px;
             height: 90px;
         }
-        .stats-contaienr{
+
+        .stats-contaienr {
             display: inline-block;
             width: 500px;
         }
@@ -24,16 +25,18 @@
         Connect Id: <input type="text" id="callTo">
         <button id="btnStart" style="display: none">Start</button>
     </div>
-    <video id="selfView" autoplay></video>
-    <video id="remoteView" autoplay></video>
+    <div>
+        <video id="selfView" autoplay></video>
+        <video id="remoteView" autoplay></video>
+    </div>
     <script src="peer.js"></script>
     <script src="test.js"></script>
 
     <button id="btnGetStatsTargetLocalStream">getStats() (localStream)</button>
     <button id="btnGetStatsTargetRemteStream">getStats() (remoteStream)</button>
     <div>
-    <div id="localStreamStatsContainer" class="stats-container"></div>
-    <div id="remoteStreamStatsContainer" class="starts-container"></div>
+        <div id="localStreamStatsContainer" class="stats-container"></div>
+        <div id="remoteStreamStatsContainer" class="starts-container"></div>
     </div>
 </body>
 

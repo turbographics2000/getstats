@@ -23,7 +23,7 @@ btnGetStatsTargetLocalStream.onclick = evt => {
   getStats(selfView.srcObject.getVideoTracks()[0], localStreamStatsContainer);
 }
 
-btnGetStatsTargetRemoteStream.onclick = evt => {
+btnGetStatsTargetRemteStream.onclick = evt => {
   getStats(remoteView.srcObject.getVideoTracks()[0], remoteStreamStatsContainer);
 }
 
@@ -150,8 +150,9 @@ function getStats(track, container) {
           div.id = 'rpt' + key;
           container.appenndChild(div);
         }
-        reportMemberDiv.textContent = report[key];
+        reportMemberDiv.textContent = key + ": " + report[key];
       })
     })
-  })
+  });
+  setTimeout(getStats.bind(track, container), 1000);
 }
