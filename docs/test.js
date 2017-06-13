@@ -19,7 +19,7 @@ function getRmoteIds() {
   var getRemoteIdSIId = null;
   getRemoteIdSIId = setInterval(_ => {
     fetch(`https://skyway.io/active/list/${apiKey}`).then(res => res.json()).then(list => {
-      var remotIds = list.filter(memberId => memberId !== id);
+      var remotIds = list.filter(memberId => memberId !== myId);
       if (remotIds.length) {
         callTo.value = remoteIds[0];
         clearInterval(getRemoteIdSIId);
